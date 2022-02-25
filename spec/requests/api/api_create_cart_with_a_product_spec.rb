@@ -1,14 +1,14 @@
-RSpec.describe "POST /api/carts", type: :request do
+RSpec.describe "POST /api/orders", type: :request do
   let!(:product) { create(:product) }
   subject { response }
   before do
-    post "/api/carts",
-         params: { cart: { product_id: product.id } }
+    post "/api/orders",
+         params: { order: { product_id: product.id } }
   end
 
   it { is_expected.to have_http_status :created }
-  it "is expected to save cart to database" do
-    expect(Cart.all).to_not eq nil
+  it "is expected to save order to database" do
+    expect(order.all).to_not eq nil
   end
 
   it "is expected to return a message that the product was added to the order" do
@@ -17,9 +17,9 @@ RSpec.describe "POST /api/carts", type: :request do
 
   describe "unsuccessful request with invalid product id" do
     before do
-      post "/api/carts",
+      post "/api/orders",
            params: {
-             cart: { product_id: '' }
+             order: { product_id: '' }
            }
     end
 
