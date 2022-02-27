@@ -14,9 +14,11 @@ RSpec.describe "POST /api/orders", type: :request do
   it "is expected to associate order with an orderItem instance that points to a product" do
     expect(@order.items.first.product_id).to eq product.id
   end
-  # Test on ine 18 has been commented out since its breaking the whole test.
-  # it "is expected to associate a product with the order"
-  # expect(@order.products).to include product
+  
+  it "is expected to associate a product with the order" do
+   expect(@order.products).to include product
+   
+  end
   it 'is expected to add amount value to orderItem' do
     expect(@order.items.first.amount).to eq 2
   end
