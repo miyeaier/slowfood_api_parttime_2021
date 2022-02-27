@@ -3,7 +3,7 @@ RSpec.describe "POST /api/orders", type: :request do
   subject { response }
   before do
     post "/api/orders",
-         params: { order: { product_id: product.id } }
+         params: { order: { product_id: product.id, amount: 2 } }
     @order = Order.last
   end
 
@@ -17,7 +17,9 @@ RSpec.describe "POST /api/orders", type: :request do
   # Test on ine 18 has been commented out since its breaking the whole test.
   # it "is expected to associate a product with the order"
   # expect(@order.products).to include product
-
+  it 'is expected to add amount value to orderItem' do
+    expect(@order.items.first.amount).to eq 2
+  end
   it "is expected to return a message that the product was added to the order" do
     expect(response_json["message"])
     .to eq "#{product.name} has been added to your order"

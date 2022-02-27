@@ -4,7 +4,7 @@ class Api::OrdersController < ApplicationController
   def create
     product = Product.find(params[:order][:product_id])
     order = Order.create
-    order.items.create(product: product)
+    order.items.create(product: product, amount: params[:order][:amount])
     render json: { message: "#{product.name} has been added to your order" }, status: 201
   end
 
