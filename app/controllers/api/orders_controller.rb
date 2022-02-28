@@ -1,4 +1,5 @@
 class Api::OrdersController < ApplicationController
+  
   rescue_from ActiveRecord::RecordNotFound, with: :product_not_found
 
   def create
@@ -9,8 +10,7 @@ class Api::OrdersController < ApplicationController
   end
 
   private
-
-  def product_not_found
-    render json: { message: "we couldnot find the product you tried to add." }
+   def product_not_found
+    render json: { message: "we could not find the product you tried to add." }
   end
 end

@@ -1,4 +1,5 @@
 RSpec.describe Order, type: :model do
+
   describe "Associations" do
     it { is_expected.to have_many :items }
     it { is_expected.to have_many(:products).through(:items) }
@@ -9,4 +10,5 @@ RSpec.describe Order, type: :model do
       expect(create(:order)).to be_valid
     end
   end
+  
 end
