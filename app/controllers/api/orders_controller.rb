@@ -11,6 +11,6 @@ class Api::OrdersController < ApplicationController
 
   private
    def product_not_found
-    render json: { message: "we could not find the product you tried to add." }
+    render json: { message: "we could not find the product you tried to add." }, status: 404
   end
 end

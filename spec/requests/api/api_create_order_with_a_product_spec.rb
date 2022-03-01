@@ -41,6 +41,8 @@ RSpec.describe 'POST /api/orders', type: :request do
              order: { product_id: '' },
            }
     end
+    
+    it { is_expected.to have_http_status 404 }
 
     it 'is expected to return product not found message' do
        expect(response_json["message"])
