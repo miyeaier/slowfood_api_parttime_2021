@@ -1,8 +1,10 @@
-RSpec.describe "PUT/api/orders/" do
+RSpec.describe "PUT /api/orders/", type: :request do
   let(:order) { create(:order) }
   let(:product_1) { create(:product) }
   let(:product_2) { create(:product) }
+
   subject { response }
+
   before do
     order.items.create(product: product_2)
     put "/api/orders/#{order.id}",
@@ -11,7 +13,11 @@ RSpec.describe "PUT/api/orders/" do
 
   it { is_expected.to have_http_status 200 }
 
-  it "is expected to recponed a message" do
+  it "is expected to responed a message" do
     expect(response_json["message"]).to eq "you order is updated"
   end
+
+  #it "is expected to add amount value to orderItem" do
+  # expect(order.items.first.amount).to eq 2
+  #end
 end
