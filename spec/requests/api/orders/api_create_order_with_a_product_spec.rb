@@ -28,7 +28,7 @@ RSpec.describe "POST /api/orders", type: :request do
 
   it "is expected to return a message that the product was added to the order" do
      expect(response_json["message"])
-    .to eq "#{product.name} has been added to your order"
+    .to eq "#{product.name} has been added to your order."
   end
 
   describe "unsuccessful request with invalid product id" do
