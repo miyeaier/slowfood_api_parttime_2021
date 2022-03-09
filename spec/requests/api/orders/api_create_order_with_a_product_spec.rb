@@ -31,17 +31,14 @@ RSpec.describe "POST /api/orders", type: :request do
       expect(response_json["message"]).to eq "#{product.name} has been added to your order."
     end
   end
-  
-  describe"without valid params" do
+
+  describe "without valid params" do
     before do
       post "/api/orders",
-           params: { order: { product_id: product.id, amount: 2 } }
-           headers:{}
+           params: { order: { product_id: product.id, amount: 2 } },
+           headers: {}
     end
-    it{ is_expected.to have_http_status 401}
-  end 
-
-    
+    it { is_expected.to have_http_status 401 }
   end
   describe "unsuccessful request with invalid product id" do
     before do
