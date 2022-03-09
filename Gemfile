@@ -18,6 +18,7 @@ group :development, :test do
   gem "coveralls", require: false
   gem "pry-rails"
   gem "pry-byebug"
+  gem 'faker', '~> 2.20'
   gem "rspec-rails"
   gem "shoulda-matchers"
   gem "factory_bot_rails"

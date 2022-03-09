@@ -1,11 +1,14 @@
 RSpec.describe "POST /api/orders", type: :request do
   let!(:product) { create(:product) }
+  let(:user) { create(:user) }
+  let(:credentials) { user.create_new_auth_token }
   subject { response }
 
   describe "with valid params" do
     before do
       post "/api/orders",
-           params: { order: { product_id: product.id, amount: 2 } }
+           params: { order: { product_id: product.id, amount: 2 } },
+           headers: credentials
       @order = Order.last
     end
 
@@ -36,16 +39,21 @@ RSpec.describe "POST /api/orders", type: :request do
     before do
       post "/api/orders",
            params: { order: { product_id: product.id, amount: 2 } },
-           headers: {}
+           headers: nil
     end
     it { is_expected.to have_http_status 401 }
+
+    it "is expected to respond with an error message" do
+      expect(response_json["errors"].first ).to eq "You need to sign in or sign up before continuing."
+    end
   end
   describe "unsuccessful request with invalid product id" do
     before do
       post "/api/orders",
            params: {
              order: { product_id: "" },
-           }
+           },
+           headers: credentials
     end
 
     it { is_expected.to have_http_status 404 }

@@ -1,4 +1,5 @@
 class Api::OrdersController < ApplicationController
+  before_action :authenticate_user!,only: [:create]
   rescue_from ActiveRecord::RecordNotFound, with: :product_not_found
 
   def create
